@@ -7,7 +7,7 @@ USwipeGestureRecognizer::USwipeGestureRecognizer() 	: Super()
 {
 	MinimumSwipeDistance = 50.f;
 	Tolerance = 20.f;
-	MaximumGestureDuration = .35f;
+	MaximumGestureDuration = .25f;
 	MaximumTouches = 1;
 	MinimumTouches = 1;
 }
@@ -20,6 +20,11 @@ void USwipeGestureRecognizer::GestureFinished()
 	}
 	
 	if (TouchData[0].GestureLength() < MinimumSwipeDistance)
+	{
+		return;
+	}
+	
+	if (TouchData[0].ElapsedTime() > MaximumGestureDuration)
 	{
 		return;
 	}

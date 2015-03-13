@@ -45,7 +45,8 @@ class GESTURERECOGNIZER_API UPanGestureRecognizer : public UDynamicGestureRecogn
 {
 	GENERATED_BODY()
 	UPanGestureRecognizer();
-	
+
+public:
 	/** The minimum number of fingers that must be touching the screen in order for the delegate to be notified */
 	UPROPERTY(EditAnywhere, Category=Gestures)
 	int32 MinimumTouchCount;
@@ -55,8 +56,11 @@ class GESTURERECOGNIZER_API UPanGestureRecognizer : public UDynamicGestureRecogn
 	int32 MaximumTouchCount;
 	
 	/** Access to the position of each key for the delegate method */
-	UPROPERTY(EditAnywhere, Category="Gestures|Result")
+	UPROPERTY(VisibleInstanceOnly, Category="Gestures|Result")
 	FVector2D TouchPoints[EKeys::NUM_TOUCH_KEYS];
+	
+	UFUNCTION(BlueprintCallable, Category="Gestures|Result")
+	TArray<FVector2D> GetTouchPoints();
 	
 	/** Allows delegate access to the number of fingers currently touching the screen */
 	UFUNCTION(BlueprintCallable, Category="Gestures|Result")

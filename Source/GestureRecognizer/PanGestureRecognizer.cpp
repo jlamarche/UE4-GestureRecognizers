@@ -46,3 +46,14 @@ int32 UPanGestureRecognizer::GetTouchCount()
 {
 	return CurrentTouchCount;
 }
+
+TArray<FVector2D> UPanGestureRecognizer::GetTouchPoints()
+{
+	TArray<FVector2D> Points;
+	for (int32 Index = 0; Index < CurrentTouchCount; Index++)
+	{
+		Points.Add(TouchPoints[Index]);
+	}
+	return Points;
+	
+}

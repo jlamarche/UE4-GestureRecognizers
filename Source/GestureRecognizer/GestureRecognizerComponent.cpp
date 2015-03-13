@@ -147,11 +147,13 @@ void UGestureRecognizerComponent::UpdateStoredTouchData(const FVector (&Touches)
 			{
 				TouchData[Index].bIsTouchStarted = true;
 				TouchBegan(Index, TouchData[Index].TouchPoints.Last());
+				TouchData[Index].FirstTouchTime = now;
 			}
 			else
 			{
 				TouchMoved(Index, TouchData[Index].TouchPoints.Last());
 			}
+			TouchData[Index].LatestTouchTime = now;
 		}
 		// Not a touch, mark it as ended.
 		else
