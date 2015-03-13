@@ -87,7 +87,7 @@ struct FGestureTouchData
 };
 class UGestureRecognizerComponent;
 
-//DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FGestureMoved, UGestureRecognizerComponent *, Recognizer);
+
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FGestureEnded, UGestureRecognizerComponent *, Recognizer);
 
 
@@ -106,10 +106,6 @@ public:
 	
 	// ===========================================================================
 	// Delegates
-
-	/** Delegate function called for ongoing gestures. This value is used, for example, to repeatedly provide the current values of a pinch or rotate gesture */
-//	UPROPERTY(BlueprintAssignable, Category=Gestures)
-//	FGestureMoved GestureMovedDelegate;
 	
 	/** Delegate function called when a gesture is completed. For simple gestures, like swipes and taps, this is the only delegate function that will get called. For ongoing gestures, this will indicate that the gesture has ended and no more FGestureMoved calls will happen until the next gesture starts.
 	 */

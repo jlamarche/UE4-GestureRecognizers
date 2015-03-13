@@ -6,7 +6,7 @@
 #include "TapGestureRecognizer.generated.h"
 
 /**
- * 
+ * Recognizes tap gestures, including multi-tap (double tap, triple tap) gestures and multiple-touch taps (two-finger taps).
  */
 UCLASS(ClassGroup=Input, meta=(BlueprintSpawnableComponent))
 class UTapGestureRecognizer : public UGestureRecognizerComponent
