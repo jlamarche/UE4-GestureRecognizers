@@ -35,6 +35,10 @@ public:
 	/** If checking for multiple taps (double-tap, triple-tap), set this value to a value higher than one */
 	UPROPERTY(EditAnywhere, Category=Gestures)
 	int32 MinimumNumberOfTaps;
+	
+	/** The maximum multiple tap (double, triple) that this recognizer will recognize. */
+	UPROPERTY(EditAnywhere, Category=Gestures)
+	int32 MaximumNumberOfTaps;
 
 	/** If looking for multi-taps, the maximum amount of time that can elapse from the start of one tap until the start of the next tap for them to be considered a single gesture **/
 	UPROPERTY(EditAnywhere, Category=Gestures)

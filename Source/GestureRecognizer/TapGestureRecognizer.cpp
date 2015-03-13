@@ -10,6 +10,7 @@ UTapGestureRecognizer::UTapGestureRecognizer() 	: Super()
 , MinimumTouchCount(1)
 , MaximumTouchCount(1)
 , MinimumNumberOfTaps(1)
+, MaximumNumberOfTaps(MAX_int32)
 , MaximumTimeBetweenTaps(.1f)
 , NumberOfFingersInTap(0)
 , LastTapTime(0.f)
@@ -32,7 +33,12 @@ void UTapGestureRecognizer::DetectGestures(float DeltaTime)
 	if ( (Now > LastTapTime + MaximumTimeBetweenTaps) && (TapCount > 0) && CurrentTouchCount == 0)
 	{
 		NumberOfTaps = TapCount;
-		GestureEndedDelegate.Broadcast(this);
+		
+		if (NumberOfTaps >= MinimumNumberOfTaps && NumberOfTaps <= MaximumNumberOfTaps)
+		{
+			GestureEndedDelegate.Broadcast(this);
+		}
+
 		TapCount = 0;
 		NumberOfFingersInTap = 0;
 		LastTapTime = 0.f;
