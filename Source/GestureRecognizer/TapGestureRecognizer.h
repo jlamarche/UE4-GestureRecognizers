@@ -51,10 +51,8 @@ public:
 	int32 NumberOfTaps;
 	
 protected:
-	virtual void InitializeComponent() override;
 	virtual void DetectGestures(float DeltaTime) override;
 	virtual void GestureFinished() override;
-	virtual void ResetGesture(void) override;
 	
 	float LastTapTime;
 	int32 TapCount;

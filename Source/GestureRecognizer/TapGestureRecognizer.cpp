@@ -19,13 +19,6 @@ UTapGestureRecognizer::UTapGestureRecognizer() 	: Super()
 
 }
 
-// Called when the game starts
-void UTapGestureRecognizer::InitializeComponent()
-{
-	Super::InitializeComponent();
-
-}
-
 void UTapGestureRecognizer::DetectGestures(float DeltaTime)
 {
 	float Now = GetWorld()->GetRealTimeSeconds();
@@ -68,9 +61,4 @@ void UTapGestureRecognizer::GestureFinished()
 			LastTapTime = GetWorld()->GetRealTimeSeconds();
 		}
 	}
-}
-
-void UTapGestureRecognizer::ResetGesture()
-{
-	Super::ResetGesture();
 }
