@@ -151,7 +151,7 @@ public:
 	uint8 MaximumTouches;
 	
 	/** When a delegate is informed of a swipe, it can query this field to identify which type of swipe was detected */
-	UPROPERTY(EditAnywhere, Category="Gestures|Result")
+	UPROPERTY(VisibleInstanceOnly, Category="Gestures|Result")
 	ESwipeType SwipeType;
 	
 	UFUNCTION(BlueprintCallable, Category="Gestures|Result")

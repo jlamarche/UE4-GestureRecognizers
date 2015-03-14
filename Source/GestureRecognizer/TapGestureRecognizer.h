@@ -77,10 +77,10 @@ public:
 	UPROPERTY(EditAnywhere, Category=Gestures)
 	float MaximumTimeBetweenTaps;
 	
-	UPROPERTY(BlueprintReadWrite, Category="Gestures|Result")
+	UPROPERTY(VisibleInstanceOnly, Category="Gestures|Result")
 	int32 NumberOfFingersInTap;
 	
-	UPROPERTY(BlueprintReadWrite, Category="Gestures|Result")
+	UPROPERTY(VisibleInstanceOnly, Category="Gestures|Result")
 	int32 NumberOfTaps;
 	
 protected:

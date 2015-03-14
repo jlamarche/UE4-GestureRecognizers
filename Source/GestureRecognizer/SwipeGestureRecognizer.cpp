@@ -37,11 +37,15 @@ void USwipeGestureRecognizer::GestureFinished()
 	float XDifference = TouchData[0].XDifference();
 	const FVector2D ViewportSize = FVector2D(GEngine->GameViewport->Viewport->GetSizeXY());
 	
+	float HorizontalEdgeTolerance = .1f * ViewportSize.X;
+	float VerticalEdgeTolerance = .1f * ViewportSize.Y;
+	
 	// Horizontal Swipes
 	if (XDistance >= MinimumSwipeDistance && YDistance < Tolerance)
 	{
+		// @TODO: Swipe from edges need a tolerance value, probably based on percentage of screen size.
 		// Swipe from Left Edge
-		if (FMath::IsNearlyEqual(StartPoint.X, 0.f) && XDifference > 0.f)
+		if (StartPoint.X <= HorizontalEdgeTolerance && XDifference > 0.f)
 		{
 			if (SupportedSwipes.bSupportsSwipeFromLeftEdge)
 			{
@@ -59,7 +63,7 @@ void USwipeGestureRecognizer::GestureFinished()
 			}
 		}
 		// Swipe from Right Edge
-		else if (FMath::IsNearlyEqual(StartPoint.X, ViewportSize.X))
+		else if (StartPoint.X >= (ViewportSize.X - HorizontalEdgeTolerance))
 		{
 			if (SupportedSwipes.bSupportsSwipeFromRightEdge)
 			{
@@ -81,7 +85,7 @@ void USwipeGestureRecognizer::GestureFinished()
 	else if (YDistance >= MinimumSwipeDistance && XDistance < Tolerance)
 	{
 		// Swipe from Top Edge
-		if (FMath::IsNearlyEqual(StartPoint.Y, 0.f) && YDifference > 0.f)
+		if (StartPoint.Y <= VerticalEdgeTolerance && YDifference > 0.f)
 		{
 			if (SupportedSwipes.bSupportsSwipeFromTopEdge)
 			{
@@ -99,11 +103,11 @@ void USwipeGestureRecognizer::GestureFinished()
 			}
 		}
 		// Swipe from Bottom
-		else if (FMath::IsNearlyEqual(StartPoint.Y, ViewportSize.Y))
+		else if (StartPoint.Y > (ViewportSize.Y - VerticalEdgeTolerance))
 		{
-			if (SupportedSwipes.bSupportsSwipeFromTopEdge)
+			if (SupportedSwipes.bSupportsSwipeFromBottomEdge)
 			{
-				SwipeType = ESwipeType::SwipeFromTopEdge;
+				SwipeType = ESwipeType::SwipeFromBottomEdge;
 				GestureEndedDelegate.Broadcast(this);
 			}
 		}
