@@ -195,6 +195,7 @@ protected:
 	float LastFingerTouchTime;
 	
 	virtual void ResetGesture(void);
+	virtual void ReceiveInitializeComponent() override;
 	
 private:
 	void CalculateTouchCount(const FVector (&Touches)[EKeys::NUM_TOUCH_KEYS]);

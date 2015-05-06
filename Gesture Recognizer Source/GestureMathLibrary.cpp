@@ -24,3 +24,46 @@ float UGestureMathLibrary::AngleBetweenLines(const FVector2D& Line1Start, const 
 	return (Line2Slope > Line1Slope) ? Angle : -Angle;
 	
 }
+bool UGestureMathLibrary::PointOnLeftHalfOfScreen(FVector2D Point)
+{
+	const FVector2D ViewportSize = FVector2D(GEngine->GameViewport->Viewport->GetSizeXY());
+	const FVector2D ViewportCenter =  FVector2D(ViewportSize.X/2, ViewportSize.Y/2);
+
+	return (Point.X <= ViewportCenter.X);
+}
+
+bool UGestureMathLibrary::PointOnRighHalfOfScreen(FVector2D Point)
+{
+	return !PointOnLeftHalfOfScreen(Point);
+}
+
+bool UGestureMathLibrary::PointOnTopHalfOfScreen(FVector2D Point)
+{
+	const FVector2D ViewportSize = FVector2D(GEngine->GameViewport->Viewport->GetSizeXY());
+	const FVector2D ViewportCenter =  FVector2D(ViewportSize.X/2, ViewportSize.Y/2);
+	
+	return (Point.Y <= ViewportCenter.Y);
+}
+
+bool UGestureMathLibrary::PointOnBottomHalfOfScreen(FVector2D Point)
+{
+	return !(PointOnTopHalfOfScreen(Point));
+}
+
+float UGestureMathLibrary::GetScalingFactorForScreen()
+{
+	const FVector2D ViewportSize = FVector2D(GEngine->GameViewport->Viewport->GetSizeXY());
+	const float ViewportScale = GetDefault<UUserInterfaceSettings>(UUserInterfaceSettings::StaticClass())->GetDPIScaleBasedOnSize(FIntPoint(ViewportSize.X, ViewportSize.Y));
+	
+	return ViewportScale;
+}
+
+float UGestureMathLibrary::ScaleFloatForScreen(float Value)
+{
+	return Value * GetScalingFactorForScreen();
+}
+
+FVector2D UGestureMathLibrary::ScaleVector2DForScreen(FVector2D Value)
+{
+	return Value * GetScalingFactorForScreen();
+}

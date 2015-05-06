@@ -208,3 +208,8 @@ void UGestureRecognizerComponent::CalculateTouchCount(const FVector (&Touches)[E
 		MaxFingersThisGesture = CurrentTouchCount;
 	}
 }
+
+void UGestureRecognizerComponent::ReceiveInitializeComponent()
+{
+	Super::ReceiveInitializeComponent();
+}

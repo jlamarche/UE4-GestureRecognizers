@@ -52,6 +52,7 @@ class UInstantTapRecognizer : public UGestureRecognizerComponent
 {
 	GENERATED_BODY()
 	
+public:
 	/** Use by delegates to identify which finger touched the screen. Only guaranteed to be correct during the delegate call. */
 	UPROPERTY(VisibleInstanceOnly, Category="Gestures|Result")
 	int32 WhichFinger;

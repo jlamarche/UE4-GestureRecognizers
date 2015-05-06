@@ -72,6 +72,10 @@ public:
 	/** The maximum multiple tap (double, triple) that this recognizer will recognize. */
 	UPROPERTY(EditAnywhere, Category=Gestures)
 	int32 MaximumNumberOfTaps;
+	
+	/** The maximum distance in pixels that a finger can move and still count as a tap */
+	UPROPERTY(EditAnywhere, Category=Gestures)
+	int32 Tolerance;
 
 	/** If looking for multi-taps, the maximum amount of time that can elapse from the start of one tap until the start of the next tap for them to be considered a single gesture **/
 	UPROPERTY(EditAnywhere, Category=Gestures)
@@ -98,10 +102,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Gestures|Result")
 	bool TapWasOnBottomHalf();
 	
-	virtual void ReceiveTick(float DeltaTime);
-	
+	virtual void ReceiveTick(float DeltaTime) override;
+	virtual void ReceiveInitializeComponent() override;
 	
 protected:
 	FVector2D LastTapLocation;
 	int32 TapCounts[EKeys::NUM_TOUCH_KEYS];
+	float ToleranceSquared;
 };

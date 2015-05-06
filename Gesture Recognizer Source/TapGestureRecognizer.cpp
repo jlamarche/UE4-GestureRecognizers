@@ -3,6 +3,7 @@
 #include "%%%PROJECTHEADER%%%"
 #include "TapGestureRecognizer.h"
 
+
 UTapGestureRecognizer::UTapGestureRecognizer() 	: Super()
 , MinimumTimeForTap(0.f)
 , MaximumTimeForTap(0.3f)
@@ -10,8 +11,10 @@ UTapGestureRecognizer::UTapGestureRecognizer() 	: Super()
 , MaximumTouchCount(1)
 , MinimumNumberOfTaps(1)
 , MaximumNumberOfTaps(MAX_int32)
+, Tolerance(15)
 , MaximumTimeBetweenTaps(.25f)
 , NumberOfFingersInTap(0)
+
 {
 	bFlushTouchDataOnGestureEnded = false;
 }
@@ -79,7 +82,7 @@ void UTapGestureRecognizer::ReceiveTick(float DeltaTime)
 			{
 				FVector2D TouchDelta = ThisTouch.TouchPoints.Last() - ThisTouch.TouchPoints[0];
 				float MovementSquared = TouchDelta.SizeSquared();
-				if (MovementSquared > 16.f) // More than 4 pixels of movement
+				if (MovementSquared > ToleranceSquared) //
 				{
 					// Not a tap, move along
 					ResetGesture();
@@ -159,7 +162,9 @@ void UTapGestureRecognizer::ReceiveTick(float DeltaTime)
 	}
 	
 }
-//void UTapGestureRecognizer::ResetGesture()
-//{
-//	Super::ResetGesture();
-//}
+void UTapGestureRecognizer::ReceiveInitializeComponent()
+{
+	Super::ReceiveInitializeComponent();
+	ToleranceSquared = Tolerance * Tolerance;
+	
+}

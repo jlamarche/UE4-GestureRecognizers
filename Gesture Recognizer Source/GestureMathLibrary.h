@@ -58,4 +58,26 @@ public:
 	 */
 	UFUNCTION(BlueprintPure, Category="Republic Sniper|Math|Gesture Utils")
 	static float AngleBetweenLines(const FVector2D& Line1Start, const FVector2D& Line1End, const FVector2D& Line2Start, const FVector2D& Line2End);
+	
+	UFUNCTION(BlueprintPure, Category="Republic Sniper|Math|Gesture Utils")
+	static bool PointOnLeftHalfOfScreen(FVector2D Point);
+	
+	UFUNCTION(BlueprintPure, Category="Republic Sniper|Math|Gesture Utils")
+	static bool PointOnRighHalfOfScreen(FVector2D Point);
+	
+	UFUNCTION(BlueprintPure, Category="Republic Sniper|Math|Gesture Utils")
+	static bool PointOnTopHalfOfScreen(FVector2D Point);
+	
+	UFUNCTION(BlueprintPure, Category="Republic Sniper|Math|Gesture Utils")
+	static bool PointOnBottomHalfOfScreen(FVector2D Point);
+
+		/** Gesture values typically are based on points, not pixels. On a Retina or other HighDPI screen, you typically need your tolerances to be considerably higher because moving your finger the same distance will result in a lot more pixels. This function will return the scaling factor for the current device's screen to normalize to a standard scale */
+	UFUNCTION(BlueprintPure, Category="Republic Sniper|Math|Gesture Utils")
+	static float GetScalingFactorForScreen();
+	
+	/** Converts a float value to account for the resolution of the screen (1.0 = ~72DPI) */
+	static float ScaleFloatForScreen(float Value);
+	
+	/** Converts an FVector value to account for the resolution of the screen (1.0 = ~72DPI) */
+	static FVector2D ScaleVector2DForScreen(FVector2D Value);
 };
