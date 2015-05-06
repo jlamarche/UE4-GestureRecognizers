@@ -39,7 +39,7 @@
 
 
 /**
- *  Recognizes pan gestures - one or more fingers moving around the screen. NOTE - this gesture recognizer is unfinished and should not be relied up on for production work.
+ *  Recognizes pan gestures - one or more fingers moving around the screen
  */
 UCLASS(ClassGroup=Input, meta=(BlueprintSpawnableComponent))
 class UPanGestureRecognizer : public UDynamicGestureRecognizer
@@ -67,23 +67,21 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Gestures|Result")
 	int32 GetTouchCount();
 	
-	/** Convenience function to retrieve the distance moved by any finger since the last delegate call */
+	/** Convenience function to retrieve the distance moved by any finger since the last delegate call. */
 	UFUNCTION(BlueprintCallable, Category="Gestures|Result")
 	FVector2D LastMoveDistanceForTouch(int32 Touch);
+	
+	/** Convenience function to retrieve the distance moved by any finger since the last delegate call. his value is adjusted for screen resolution and returned in points not pixels */
+	UFUNCTION(BlueprintCallable, Category="Gestures|Result")
+	FVector2D LastMoveDistanceInPointsForTouch(int32 Touch);
 	
 	/** Convenience function to retrieve the distance moved by the first finger since the last delegate call */
 	UFUNCTION(BlueprintCallable, Category="Gestures|Result")
 	FVector2D LastMoveDistanceForFirstTouch();
 	
+	/** Convenience function to retrieve the distance moved by the first finger since the last delegate call. This value is adjusted for screen resolution and returned in points not pixels. */
+	UFUNCTION(BlueprintCallable, Category="Gestures|Result")
+	FVector2D LastMoveDistanceForFirstTouchInPoints();
 	
 	
 	
-protected:
-	virtual void DetectGestures(float DeltaTime) override;
-	virtual void GestureFinished(float DeltaTime) override;
-	virtual void ResetGesture(void) override;
-	
-private:
-	bool bGestureBegan;
-	
-};

@@ -59,6 +59,8 @@ void UPinchRotateGestureRecognizer::DetectGestures(float DeltaTime)
 	float CurrentDistance = (Touch2End - Touch2Start).Size();
 	
 	DeltaDistancePixels = CurrentDistance - PreviousDistance;
+	DeltaDistancePixels = UGestureMathLibrary::ScaleFloatForScreen(DeltaDistancePixels);
+	
 	AccumulatedDistanceChange += DeltaDistancePixels;
 	
 	if (fabsf(AccumulatedDistanceChange) > MinimumDistanceChangeForPinch)

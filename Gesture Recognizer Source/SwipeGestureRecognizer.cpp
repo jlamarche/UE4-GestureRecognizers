@@ -32,7 +32,7 @@ ESwipeType USwipeGestureRecognizer::SwipeDetectedWithFinger(int32 Index) const
 {
 	FGestureTouchData ThisTouch = TouchData[Index];
 	
-	if (ThisTouch.GestureLength() < MinimumSwipeDistance)
+	if (ThisTouch.GestureLengthInPoints() < MinimumSwipeDistance)
 	{
 		return ESwipeType::SwipeNone;
 	}
@@ -45,10 +45,10 @@ ESwipeType USwipeGestureRecognizer::SwipeDetectedWithFinger(int32 Index) const
 	
 	FVector2D StartPoint = ThisTouch.TouchPoints[0];
 	FVector2D EndPoint = ThisTouch.TouchPoints.Last();
-	float XDistance = ThisTouch.XDistance();
-	float YDistance = ThisTouch.YDistance();
-	float YDifference = ThisTouch.YDifference();
-	float XDifference = ThisTouch.XDifference();
+	float XDistance = ThisTouch.XDistanceInPoints();
+	float YDistance = ThisTouch.YDistanceInPoints();
+	float YDifference = ThisTouch.YDifferenceInPoints();
+	float XDifference = ThisTouch.XDifferenceInPoints();
 	const FVector2D ViewportSize = FVector2D(GEngine->GameViewport->Viewport->GetSizeXY());
 	
 	float HorizontalEdgeTolerance = .1f * ViewportSize.X;

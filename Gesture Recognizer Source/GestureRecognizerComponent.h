@@ -68,7 +68,7 @@ struct FGestureTouchData
 	UPROPERTY()
 	bool bIsTouchStarted;
 	
-	// Straight line distance from start to end of this gesture
+	/** Straight line distance in pixels from start to end of this gesture */
 	float GestureLength()
 	{
 		FVector2D StartPosition = TouchPoints[0];
@@ -78,12 +78,19 @@ struct FGestureTouchData
 		return Distance;
 	};
 	
+	/** Straight line distance in points from start to end of this gesture */
+	float GestureLengthInPoints()
+	{
+		return UGestureMathLibrary::ScaleFloatForScreen(GestureLength());
+	};
+	
+	/** The amount of time between when this touch started and when it ended, if it ended, or between the start time and now otherwise */
 	float ElapsedTime()
 	{
 		return LatestTouchTime - FirstTouchTime;
 	};
 	
-	// Actual length of the gesture path
+	/** Actual length of the gesture path in device pixels */
 	float PixelsTraveled()
 	{
 		float DistanceTraveled = 0.f;
@@ -97,6 +104,13 @@ struct FGestureTouchData
 		return DistanceTraveled;
 	}
 	
+	/** Length of the gesture path normalized for the density of the screen */
+	float PointsTraveled()
+	{
+		return UGestureMathLibrary::ScaleFloatForScreen(PixelsTraveled());
+	}
+	
+	/** Straight-line distance on the X-axis for this touch, in device pixels, negative numbers indicate left movement, positive right*/
 	float XDifference()
 	{
 		FVector2D StartPosition = TouchPoints[0];
@@ -105,11 +119,25 @@ struct FGestureTouchData
 		return EndPosition.X - StartPosition.X;
 	}
 	
+	/** Straight-line distance on the X-axis for this touch, normalized for the density of the screen, negative numbers indicate left movement, positive right */
+	float XDifferenceInPoints()
+	{
+		return UGestureMathLibrary::ScaleFloatForScreen(XDifference());
+	}
+	
+	/** How many device pixels traveled along the X-axis (absolute value of XDifference). Always positive, does not indicate direction of travel */
 	float XDistance()
 	{
 		return fabsf(XDifference());
 	}
 	
+	/** How many points (pixels normalized by screen resolution) traveled along the X-axis (absolute value of XDifference). Always positive, does not indicate direction of travel */
+	float XDistanceInPoints()
+	{
+		return UGestureMathLibrary::ScaleFloatForScreen(XDistance());
+	}
+	
+	/** Straight-line distance on the Y-axis for this touch, in device pixels, negative numbers indicate left movement, positive right*/
 	float YDifference()
 	{
 		FVector2D StartPosition = TouchPoints[0];
@@ -118,9 +146,22 @@ struct FGestureTouchData
 		return EndPosition.Y - StartPosition.Y;
 	}
 	
+	/** Straight-line distance on the Y-axis for this touch, normalized for the density of the screen, negative numbers indicate left movement, positive right */
+	float YDifferenceInPoints()
+	{
+		return UGestureMathLibrary::ScaleFloatForScreen(YDifference());
+	}
+	
+	/** How many device pixels traveled along the Y-axis (absolute value of XDifference). Always positive, does not indicate direction of travel */
 	float YDistance()
 	{
 		return fabsf(YDifference());
+	}
+	
+	/** How many points (pixels normalized by screen resolution) traveled along the Y-axis (absolute value of XDifference). Always positive, does not indicate direction of travel */
+	float YDistanceInPoints()
+	{
+		return UGestureMathLibrary::ScaleFloatForScreen(YDistance());
 	}
 	
 };

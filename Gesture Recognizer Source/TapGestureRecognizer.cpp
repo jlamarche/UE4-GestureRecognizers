@@ -1,6 +1,7 @@
 // 2014 MartianCraft, LLC, See eader file for license & copyright notice
 
 #include "%%%PROJECTHEADER%%%"
+#include "GestureMathLibrary.h"
 #include "TapGestureRecognizer.h"
 
 
@@ -81,6 +82,7 @@ void UTapGestureRecognizer::ReceiveTick(float DeltaTime)
 			if (ThisTouch.TouchPoints.Num() > 1)
 			{
 				FVector2D TouchDelta = ThisTouch.TouchPoints.Last() - ThisTouch.TouchPoints[0];
+				TouchDelta = UGestureMathLibrary::ScaleVector2DForScreen(TouchDelta);
 				float MovementSquared = TouchDelta.SizeSquared();
 				if (MovementSquared > ToleranceSquared) //
 				{
